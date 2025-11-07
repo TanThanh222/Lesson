@@ -16,7 +16,6 @@ let key = "HELLO"
 const findWord = (string, key) => {
     return string.toUpperCase().includes(key)
 }
-
 // console.log(findWord(string, key));
 
 
@@ -24,11 +23,7 @@ const findWord = (string, key) => {
 // - Input: Mảng chuỗi: ["one", "two", "three"], Tiền tố: "number: "
 // - Output: function(["one", "two", "three"], ’number’) 
 //             -> ["number: one", "number: two", "number: three"]
-
 const array = ["one", "two", "three"]
-
-
-
 const result = []
 
 let total = array.length;
@@ -57,15 +52,14 @@ const array3 = [1, 2, 3, 4, 5, 6]
 const getNumber = (array) => array.filter(x => x % 2 !== 0)
 // console.log(getNumber(array3));
 
-// Tính tổng các số lẻ trong mảng
+// 6. Tính tổng các số lẻ trong mảng sử dụng callback function
 const sumNumber = (callback, array) => {
-    console.log(array);
+    // console.log(array);
     let arrayResult = callback(array)
-    console.log(arrayResult);
+    // console.log(arrayResult);
     
     let total = arrayResult.reduce((total, x) => total + x, 2)
-    console.log(total);
-    
+    // console.log(total);   
 }
 
 sumNumber(getNumber, array3)
