@@ -29,7 +29,8 @@ export const tasks = [
     statusId: 1, // To Do
     flagId: 2, // Medium
     assignedTo: 1, // userId
-    deadline: new Date("2024-04-12")
+    deadline: new Date("2024-04-12"), 
+    totalAttachments: 0
   },
   {
     taskId: 2,
@@ -38,7 +39,8 @@ export const tasks = [
     statusId: 2, // In Progress
     flagId: 3, // High
     assignedTo: 2, // userId
-    deadline: new Date("2024-03-04")
+    deadline: new Date("2024-03-04"),
+    totalAttachments: 1
   },
   {
     taskId: 3,
@@ -47,7 +49,8 @@ export const tasks = [
     statusId: 1, // To Do
     flagId: 1, // Low
     assignedTo: 3, // userId
-    deadline: new Date("2024-04-02")
+    deadline: new Date("2024-04-02"),
+    totalAttachments: 2
   },
   {
     taskId: 4,
@@ -56,7 +59,8 @@ export const tasks = [
     statusId: 3, // In Review
     flagId: 2, // Medium
     assignedTo: 1, // userId
-    deadline: new Date("2024-03-15")
+    deadline: new Date("2024-03-15"), 
+    totalAttachments: 0
   },
   {
     taskId: 5,
@@ -65,7 +69,8 @@ export const tasks = [
     statusId: 4, // Done
     flagId: 1, // Low
     assignedTo: 2, // userId
-    deadline: new Date("2024-03-17")
+    deadline: new Date("2024-03-17"), 
+    totalAttachments: 1
   },
   {
     taskId: 6,
@@ -74,7 +79,8 @@ export const tasks = [
     statusId: 2, // In Progress
     flagId: 2, // Medium
     assignedTo: 3, // userId
-    deadline: new Date("2024-04-05")
+    deadline: new Date("2024-04-05"), 
+    totalAttachments: 2
   },
   {
     taskId: 7,
@@ -83,7 +89,8 @@ export const tasks = [
     statusId: 1, // To Do
     flagId: 3, // High
     assignedTo: 1, // userId
-    deadline: new Date("2024-04-20")
+    deadline: new Date("2024-04-20"), 
+    totalAttachments: 1
   },
   {
     taskId: 8,
@@ -92,7 +99,8 @@ export const tasks = [
     statusId: 3, // In Review
     flagId: 3, // High
     assignedTo: 2, // userId
-    deadline: new Date("2024-03-25")
+    deadline: new Date("2024-03-25"), 
+    totalAttachments: 0
   },
   {
     taskId: 9,
@@ -101,7 +109,8 @@ export const tasks = [
     statusId: 2, // In Progress
     flagId: 1, // Low
     assignedTo: 3, // userId
-    deadline: new Date("2024-04-10")
+    deadline: new Date("2024-04-10"),
+    totalAttachments: 2
   },
   {
     taskId: 10,
@@ -110,6 +119,7 @@ export const tasks = [
     statusId: 4, // Done
     flagId: 2, // Medium
     assignedTo: 1, // userId
-    deadline: new Date("2024-03-18")
+    deadline: new Date("2024-03-18"), 
+    totalAttachments: 4
   }
 ];

@@ -6,7 +6,7 @@ import EditIcon from "../assets/icons/EditIcon";
 import AttachmentIcon from "../assets/icons/AttachmentIcon";
 import styled from "styled-components";
 function TaskCard({ task }) {
-  const { taskId, title, description, flagId, assignedTo, deadline } = task;
+  const { taskId, title, description, flagId, assignedTo, deadline, totalAttachments } = task;
 
   const deadlineDate = new Date(deadline).toLocaleDateString("en-US", {
     month: "short",
@@ -25,8 +25,8 @@ function TaskCard({ task }) {
       </div>
       <div className="card-footer">
         <div className="footer-box">
-          <AttachmentIcon />
-          <span>{0}</span>
+          <AttachmentIcon disabled={totalAttachments > 0} />
+          <span>{totalAttachments || null}</span>
         </div>
         <FlagIcon flagId={flagId} />
         <div className="footer-box">
