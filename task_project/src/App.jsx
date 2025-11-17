@@ -22,21 +22,33 @@ function App() {
           status={STATUS_LIST.TO_DO}
           search={search}
           tasks={tasksData}
+          setTasksData={setTasksData}
         />
         <TaskList
           status={STATUS_LIST.IN_PROGRESS}
           search={search}
           tasks={tasksData}
+          setTasksData={setTasksData}
         />
         <TaskList
           status={STATUS_LIST.IN_REVIEW}
           search={search}
           tasks={tasksData}
+          setTasksData={setTasksData}
         />
-        <TaskList status={STATUS_LIST.DONE} search={search} tasks={tasksData} />
+        <TaskList
+          status={STATUS_LIST.DONE}
+          search={search}
+          tasks={tasksData}
+          setTasksData={setTasksData}
+        />
       </ListBox>
 
-      <CreateTaskModal open={open} setOpen={setOpen} setTasksData={setTasksData}/>
+      <CreateTaskModal
+        open={open}
+        setOpen={setOpen}
+        setTasksData={setTasksData}
+      />
     </Container>
   );
 }

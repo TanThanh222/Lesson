@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Col,
@@ -13,57 +13,104 @@ import {
 import FlagIcon from "../assets/icons/FlagIcon";
 import { useForm } from "antd/es/form/Form";
 import TextArea from "antd/es/input/TextArea";
-import { users, taskStatus } from "../data/data";
+import { users, taskStatus, flags } from "../data/data";
+import dayjs from "dayjs";
 
-const CreateTaskModal = ({ open, setOpen, setTasksData }) => {
+const CreateTaskModal = ({ open, setOpen, setTasksData, taskEdit }) => {
   const [form] = useForm();
+  const [flagStatus, setFlagStatus] = useState(taskEdit?.flagId);
+  // Đồng bộ form khi mở modal hoặc idEdit thay đổi
+  useEffect(() => {
+    if (open) {
+      if (taskEdit) {
+        form.setFieldsValue({
+          title: taskEdit.title,
+          description: taskEdit.description,
+          endDate: taskEdit.deadline ? dayjs(taskEdit.deadline) : null,
+          assignedTo: taskEdit.assignedTo,
+          statusId: taskEdit.statusId,
+          flagId: taskEdit.flagId,
+        });
+      } else {
+        form.resetFields();
+        form.setFieldsValue({
+          assignedTo: 1,
+          statusId: 1,
+          flagId: 1,
+        });
+      }
+    }
+  }, [open, taskEdit, form]);
 
   const handleCreateTask = async () => {
     try {
       const values = await form.validateFields();
-      setTasksData((prev) => [
-        ...prev,
-        { ...values, deadline: new Date(values.endDate) },
-      ]);
-      form.resetFields()
-      setOpen(false)
+
+      if (taskEdit) {
+        // Cập nhật task
+        setTasksData((prev) =>
+          prev.map((item) =>
+            item.taskId === taskEdit.taskId
+              ? {
+                  ...item,
+                  ...values,
+                  deadline: values.endDate ? values.endDate.toDate() : null,
+                }
+              : item
+          )
+        );
+      } else {
+        // Tạo task mới
+        const newTask = {
+          ...values,
+          id: Date.now(),
+          deadline: values.endDate ? values.endDate.toDate() : null,
+        };
+        setTasksData((prev) => [...prev, newTask]);
+      }
+
+      form.resetFields();
+      setOpen(false);
     } catch (error) {
-      console.log(error.message);
-    } 
+      console.log("Validation failed:", error);
+    }
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+    form.resetFields();
   };
 
   return (
     <Modal
       open={open}
-      onCancel={() => setOpen(false)}
+      onCancel={handleCancel}
       title={
-        <Flex>
-          <FlagIcon />
+        <Flex align="center" gap={8}>
+          <FlagIcon flagId={flagStatus || 1} />
+          <span>{taskEdit ? "Edit Task" : "Create Task"}</span>
         </Flex>
       }
       footer={
         <Row gutter={[12, 12]}>
           <Col span={12}>
-            <Button style={{ width: "100%" }}>Cancel</Button>
+            <Button style={{ width: "100%" }} onClick={handleCancel}>
+              Cancel
+            </Button>
           </Col>
-          <Col span={12} onClick={handleCreateTask}>
-            <Button type="primary" style={{ width: "100%" }}>
-              Save
+          <Col span={12}>
+            <Button
+              type="primary"
+              style={{ width: "100%" }}
+              onClick={handleCreateTask}
+            >
+              {taskEdit ? "Update" : "Save"}
             </Button>
           </Col>
         </Row>
       }
     >
-      <h4>Save Task</h4>
-      <Form
-        form={form}
-        layout="vertical"
-        initialValues={{
-          assignedTo: 1,
-          statusId: 1,
-          flagId: 1,
-        }}
-      >
+      <Form form={form} layout="vertical">
         <Row gutter={[12, 12]}>
           <Col span={16}>
             <Form.Item
@@ -74,27 +121,27 @@ const CreateTaskModal = ({ open, setOpen, setTasksData }) => {
               <Input placeholder="Type title of task" />
             </Form.Item>
           </Col>
+
           <Col span={8}>
             <Form.Item label="End Date" name="endDate">
-              <DatePicker />
+              <DatePicker style={{ width: "100%" }} />
             </Form.Item>
           </Col>
 
           <Col span={16}>
             <Form.Item label="Description" name="description">
-              <TextArea placeholder="Type description" />
+              <TextArea placeholder="Type description" rows={3} />
             </Form.Item>
           </Col>
+
           <Col span={8}>
             <Form.Item label="Assign" name="assignedTo">
               <Select placeholder="Choose assign">
-                {users.map((user) => {
-                  return (
-                    <Select.Option value={user.userId}>
-                      {user.name}
-                    </Select.Option>
-                  );
-                })}
+                {users.map((user) => (
+                  <Select.Option key={user.userId} value={user.userId}>
+                    {user.name}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
@@ -102,18 +149,29 @@ const CreateTaskModal = ({ open, setOpen, setTasksData }) => {
           <Col span={16}>
             <Form.Item label="Status" name="statusId">
               <Select placeholder="Choose status">
-                {taskStatus.map((status) => {
-                  return (
-                    <Select.Option value={status.statusId}>
-                      {status.name}
-                    </Select.Option>
-                  );
-                })}
+                {taskStatus.map((status) => (
+                  <Select.Option key={status.statusId} value={status.statusId}>
+                    {status.name}
+                  </Select.Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
 
-          <Form.Item name="flagId"></Form.Item>
+          <Col span={8}>
+            <Form.Item label="Flag" name="flagId">
+              <Select
+                placeholder="Choose flag"
+                onChange={(value) => setFlagStatus(value)}
+              >
+                {flags.map((flag) => (
+                  <Select.Option key={flag.flagId} value={flag.flagId}>
+                    <FlagIcon flagId={flag.flagId || 1} />
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
         </Row>
       </Form>
     </Modal>

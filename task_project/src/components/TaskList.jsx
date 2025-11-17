@@ -4,7 +4,7 @@ import TaskCard from "./TaskCard";
 import MoreIcon from "../assets/icons/MoreIcon";
 import PlushIcon from "../assets/icons/PlushIcon";
 import { taskStatus } from "../data/data";
-function TaskList({ status, search, tasks }) {
+function TaskList({ status, search, tasks, setTasksData }) {
   const data = tasks
     .filter((task) => task.statusId === status)
     .filter((task) => {
@@ -14,13 +14,14 @@ function TaskList({ status, search, tasks }) {
         task.title?.toLowerCase().includes(s) ||
         task.description?.toLowerCase().includes(s)
       );
-    }).sort((a, b) => {
-    // Nếu không có deadline → đẩy xuống cuối
-    if (!a.deadline) return 1;
-    if (!b.deadline) return -1;
-    // So sánh deadline (chuỗi hoặc Date)
-    return new Date(a.deadline) - new Date(b.deadline); // Cũ nhất lên đầu
-  });
+    })
+    .sort((a, b) => {
+      // Nếu không có deadline → đẩy xuống cuối
+      if (!a.deadline) return 1;
+      if (!b.deadline) return -1;
+      // So sánh deadline (chuỗi hoặc Date)
+      return new Date(a.deadline) - new Date(b.deadline); // Cũ nhất lên đầu
+    });
   const titleList = taskStatus.find((item) => item.statusId === status);
   return (
     <List>
@@ -42,7 +43,13 @@ function TaskList({ status, search, tasks }) {
 
       <div className="list-content">
         {data.map((task) => {
-          return <TaskCard key={task.taskId} task={task} />;
+          return (
+            <TaskCard
+              key={task.taskId}
+              task={task}
+              setTasksData={setTasksData}
+            />
+          );
         })}
       </div>
     </List>

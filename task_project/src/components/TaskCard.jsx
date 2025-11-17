@@ -1,40 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import AssignName from "./AssignName";
 import FlagIcon from "../assets/icons/FlagIcon";
 import ClockIcon from "../assets/icons/ClockIcon";
 import EditIcon from "../assets/icons/EditIcon";
 import AttachmentIcon from "../assets/icons/AttachmentIcon";
 import styled from "styled-components";
-function TaskCard({ task }) {
-  const { taskId, title, description, flagId, assignedTo, deadline, totalAttachments } = task;
+import CreateTaskModal from "./CreateTaskModal";
+function TaskCard({ task, setTasksData }) {
+  const {
+    taskId,
+    title,
+    description,
+    flagId,
+    assignedTo,
+    deadline,
+    totalAttachments,
+  } = task;
 
   const deadlineDate = new Date(deadline).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
   });
 
+  const [open, setOpen] = useState(false);
   return (
-    <Card key={taskId}>
-      <div className="card-header">
-        <div className="card-content">
-          <span className="title">{title}</span>
-          <EditIcon />
+    <>
+      <Card key={taskId}>
+        <div className="card-header">
+          <div className="card-content">
+            <span className="title">{title}</span>
+            <EditBtn onClick={() => setOpen(!open)}>
+              <EditIcon />
+            </EditBtn>
+          </div>
+          <div className="description">{description}</div>
+          <AssignName assignedTo={assignedTo} />
         </div>
-        <div className="description">{description}</div>
-        <AssignName assignedTo={assignedTo}/>
-      </div>
-      <div className="card-footer">
-        <div className="footer-box">
-          <AttachmentIcon disabled={totalAttachments > 0} />
-          <span>{totalAttachments || null}</span>
+        <div className="card-footer">
+          <div className="footer-box">
+            <AttachmentIcon disabled={totalAttachments > 0} />
+            <span>{totalAttachments || null}</span>
+          </div>
+          <FlagIcon flagId={flagId} />
+          <div className="footer-box">
+            <ClockIcon />
+            <span>{deadlineDate}</span>
+          </div>
         </div>
-        <FlagIcon flagId={flagId} />
-        <div className="footer-box">
-          <ClockIcon />
-          <span>{deadlineDate}</span>
-        </div>
-      </div>
-    </Card>
+      </Card>
+
+      <CreateTaskModal
+        open={open}
+        setOpen={setOpen}
+        setTasksData={setTasksData}
+        taskEdit={task}
+      />
+    </>
   );
 }
 
@@ -83,4 +104,8 @@ const Card = styled.div`
       font-weight: 500;
     }
   }
+`;
+
+const EditBtn = styled.button`
+  background: transparent;
 `;
