@@ -6,11 +6,25 @@ import Button from "./components/Button";
 import { STATUS_LIST } from "./constants";
 import { useState } from "react";
 import CreateTaskModal from "./components/CreateTaskModal";
-import { tasks } from "./data/data";
+import axios from "axios"
+import { useEffect } from "react";
 function App() {
-  const [tasksData, setTasksData] = useState(tasks);
+  const [tasksData, setTasksData] = useState([]);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+
+  const getTasks = async () => {
+    try {
+      const res = await axios.get('https://mindx-mockup-server.vercel.app/api/resources/tasks?apiKey=69206f04c549072033e5e004')
+      setTasksData(res.data.data.data)
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getTasks()
+  }, [])
   return (
     <Container>
       <Header>

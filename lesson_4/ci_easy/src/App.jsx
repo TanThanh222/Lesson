@@ -1,15 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserInfo from "./pages/UserInfo";
 import TodoList from "./pages/TodoList";
-
+import axios from "axios";
 // Mở terminal - cd vào thư mục ci_easy - Chạy: npm i styled-components
 import styled from "styled-components";
 
 function App() {
   const [switchLesson, setSwitchLesson] = useState("user_info");
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const getUsers = async () => {
+    try {
+      const response = await axios.get(
+        "https://mindx-mockup-server.vercel.app/api/resources/users?apiKey=69206f04c549072033e5e004"
+      );            
+      setUsers(response.data.data.data);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <Container>
       <ContentBox>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {users?.map((user) => {
+              return <p>{user?.name}</p>;
+            })}
+          </>
+        )}
         <ControlHeader>
           <button onClick={() => setSwitchLesson("user_info")}>
             User Info

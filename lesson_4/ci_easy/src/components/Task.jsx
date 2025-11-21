@@ -4,14 +4,6 @@ const Task = ({ task, tasks, setTasks }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [nameEdited, setNameEdited] = useState(task.name);
   const handleEditTask = () => {
-    // Cách 1: Sử dụng findIndex và Splice để thay thế task theo id
-    // const editTask = {...task, name: nameEdited} // Tạo task mới với dữ liệu name được chỉnh sửa
-    // const findIndex = tasks.findIndex((element) => element.id == task.id) // Tìm vị trí của id task muốn sửa trong mảng tasks
-
-    // const cloneArr = [...tasks] // Clone mảng tasks (Vì phương thức Splice sẽ làm thay đổi mảng gốc)
-    // cloneArr.splice(findIndex, 1, editTask) // Dùng Splice chèn editTask vào vị trí muốn thay thế trong mảng
-    // setTasks(cloneArr) // Cập nhật lại tasks
-
     // Cách 2: Sử dụng map để thay đổi name của task theo id
     const updateTasks = tasks.map((item) => {
       if (item.id === task.id) {
@@ -19,12 +11,7 @@ const Task = ({ task, tasks, setTasks }) => {
       }
       return item;
     });
-
-    // Cách 2: Nhưng viết ngắn gọn hơn
-    // const updateTasks = tasks.map(item => item.id === task.id ? {...item, name: nameEdited} : item)
-
     setTasks(updateTasks); // Cập nhật lại mảng updateTasks nhận về sau phương thức map cho setTasks
-
     setIsEdit(false); // Sau khi chỉnh sửa thành công -> Ẩn Input và nút Save
     updateLocalStorage(updateTasks); // Cập nhật giá trị tasks sau chỉnh sửa vào localstorage
   };

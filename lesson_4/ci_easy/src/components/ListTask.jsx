@@ -3,8 +3,6 @@ import Task from "./Task";
 import styled from "styled-components";
 
 const ListTask = ({ tasks, setTasks }) => {
-  console.log(tasks);
-
   return (
     <ListStyled>
       {tasks.map((task) => {
