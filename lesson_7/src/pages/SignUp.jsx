@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Flex, Form, Typography } from "antd";
 import InputStyled from "../components/InputStyled";
 import InputPasswordStyled from "../components/InputPasswordStyled";
@@ -6,10 +6,11 @@ import SelectStyled from "../components/SelectStyled";
 
 const SignUp = ({ setSignUp }) => {
   const [form] = Form.useForm();
-
+  const [loading, setLoading] = useState(false)
   const onFinish = (value) => {
     console.log(value);
-    
+    setLoading(true)
+    // Viết API Post để đăng ký user
   };
 
   return (
@@ -114,6 +115,7 @@ const SignUp = ({ setSignUp }) => {
           <Button
             type="primary"
             htmlType="submit"
+            loading={loading}
             className="w-full !h-12 text-base font-medium"
           >
             Sign Up

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Typography } from "antd";
 import InputStyled from "../components/InputStyled";
 import InputPasswordStyled from "../components/InputPasswordStyled";
