@@ -6,8 +6,9 @@ import InputPasswordStyled from "../components/InputPasswordStyled";
 const SignIn = ({ setSignUp }) => {
   const [form] = Form.useForm();
 
-  const onFinish = () => {}
-
+  const onFinish = (value) => {
+    console.log(value);
+  };
 
   return (
     <div className="w-screen h-screen bg-white flex justify-center items-center p-5">
@@ -24,12 +25,12 @@ const SignIn = ({ setSignUp }) => {
         </Typography.Title>
 
         <Form.Item
-          label="Email hoặc số điện thoại"
+          label="Email or phone number"
           name="username"
           rules={[
             {
               required: true,
-              message: "Vui lòng nhập email hoặc số điện thoại",
+              message: "Please enter your email or phone number",
             },
             {
               validator: (_, value) => {
@@ -43,24 +44,24 @@ const SignIn = ({ setSignUp }) => {
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error("Email hoặc số điện thoại không hợp lệ")
+                  new Error("Invalid email or phone number")
                 );
               },
             },
           ]}
         >
-          <InputStyled placeholder="youremail@gmail.com hoặc 0901234567" />
+          <InputStyled placeholder="youremail@gmail.com or 0901234567" />
         </Form.Item>
 
         <Form.Item
-          label="Mật khẩu"
+          label="Password"
           name="password"
           rules={[
-            { required: true, message: "Vui lòng nhập mật khẩu" },
-            { min: 6, message: "Mật khẩu phải có ít nhất 6 ký tự" },
+            { required: true, message: "Please enter your password" },
+            { min: 6, message: "Password must be at least 6 characters" },
           ]}
         >
-          <InputPasswordStyled placeholder="Nhập mật khẩu của bạn" />
+          <InputPasswordStyled placeholder="Enter your password" />
         </Form.Item>
 
         <Form.Item>

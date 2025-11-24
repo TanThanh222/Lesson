@@ -7,7 +7,10 @@ import SelectStyled from "../components/SelectStyled";
 const SignUp = ({ setSignUp }) => {
   const [form] = Form.useForm();
 
-  const onFinish = () => {};
+  const onFinish = (value) => {
+    console.log(value);
+    
+  };
 
   return (
     <div className="w-screen h-screen bg-white flex justify-center items-center p-5">
@@ -54,8 +57,8 @@ const SignUp = ({ setSignUp }) => {
           rules={[
             { required: true, message: "Please enter your number" },
             {
-              pattern: /^(0|\+84)[3-9][0-9]{8}$/,
-              message: "Invalid Vietnamese number (e.g. 0901234567 or +84901234567)",
+              pattern: /^[3-9][0-9]{8}$/,
+              message: "Invalid Vietnamese number",
             },
           ]}
         >
