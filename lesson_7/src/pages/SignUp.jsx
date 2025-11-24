@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import { Button, Flex, Form, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Flex, Form, message, Typography } from "antd";
 import InputStyled from "../components/InputStyled";
 import InputPasswordStyled from "../components/InputPasswordStyled";
 import SelectStyled from "../components/SelectStyled";
-
-const SignUp = ({ setSignUp }) => {
+import axios from "axios"
+const SignUp = ({ isSignUp, setSignUp }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false)
-  const onFinish = (value) => {
-    console.log(value);
+  const onFinish = async (values) => {
     setLoading(true)
-    // Viết API Post để đăng ký user
+    try {
+      const response = await axios.post(`https://mindx-mockup-server.vercel.app/api/resources/accounts?apiKey=69206f04c549072033e5e004`, values)
+      message.success(response.data.message)
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setLoading(false)
+    }
   };
+
+  useEffect(() => {
+      document.title = "Sign Up - Lesson 7"
+    }, [isSignUp])
+
 
   return (
     <div className="w-screen h-screen bg-white flex justify-center items-center p-5">

@@ -1,14 +1,37 @@
-import React, { useEffect } from "react";
-import { Button, Form, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Form, message, Typography } from "antd";
 import InputStyled from "../components/InputStyled";
 import InputPasswordStyled from "../components/InputPasswordStyled";
+import axios from "axios";
 
-const SignIn = ({ setSignUp }) => {
+const SignIn = ({ isSignUp, setSignUp }) => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false)
 
-  const onFinish = (value) => {
-    console.log(value);
+  const onFinish = async (values) => {
+    setLoading(true)
+    try {
+      const response = await axios.get(`https://mindx-mockup-server.vercel.app/api/resources/accounts?apiKey=69206f04c549072033e5e004`)
+      const users = response.data.data.data;
+      console.log(users);
+      console.log(values);
+      
+      const isLogin = users.find(user => user.email === values.username && user.password === values.password)
+      if(isLogin){
+        message.success("Login successfully!")
+      }else {
+         message.error("Login failed!")
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally{
+      setLoading(false)
+    }
   };
+
+  useEffect(() => {
+    document.title = "Sign In - Lesson 7"
+  }, [isSignUp])
 
   return (
     <div className="w-screen h-screen bg-white flex justify-center items-center p-5">
@@ -68,6 +91,7 @@ const SignIn = ({ setSignUp }) => {
           <Button
             type="primary"
             htmlType="submit"
+            loading={loading}
             className="w-full !h-12 text-base font-medium"
           >
             Sign In
