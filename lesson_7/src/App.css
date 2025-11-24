@@ -1,0 +1,12 @@
+.ant-form-item .ant-form-item-label >label{
+    font-weight: 500;
+    color: #434343e0;
+}
+
+a {
+    color: #27485e;
+}
+
+a:hover {
+     color: #18669a;
+}
