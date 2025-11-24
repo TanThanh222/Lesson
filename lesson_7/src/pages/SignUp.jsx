@@ -50,7 +50,7 @@ const SignUp = ({ setSignUp }) => {
 
         <Form.Item
           name="phone"
-          label="Number"
+          label="Phone number"
           rules={[
             { required: true, message: "Please enter your number" },
             {
