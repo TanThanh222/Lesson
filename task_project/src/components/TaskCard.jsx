@@ -15,7 +15,7 @@ function TaskCard({ task, setTasksData }) {
     assignedTo,
     deadline,
     totalAttachments,
-  } = task;
+  } = task;``
 
   const deadlineDate = new Date(deadline).toLocaleDateString("en-US", {
     month: "short",
