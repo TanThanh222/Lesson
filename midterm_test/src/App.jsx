@@ -15,20 +15,27 @@ function App() {
     (movie) => movie.id === selectedMovieId
   );
 
+  const hardDescription =
+    "Corrupt politicians, frenzied nationalists, and other warmongering forces constantly jeopardize the thin veneer of peace between neighboring countries Ostania and Westalis.";
+
+  const bannerDescription =
+    selectedMovieId === moviesData[0].id
+      ? hardDescription
+      : selectedMovie.description;
+
   return (
-  <div>
-    <Header />
-    <main className="frame-home">
-      <ExploreBanner movie={selectedMovie} />
-      <NewReleaseList
-        movies={moviesData}
-        selectedId={selectedMovieId}
-        handleSelectMovie={handleSelectMovie}
-      />
-    </main>
-  </div>
-);
+    <div>
+      <Header />
+      <main className="frame-home">
+        <ExploreBanner movie={selectedMovie} description={bannerDescription} />
+        <NewReleaseList
+          movies={moviesData}
+          selectedId={selectedMovieId}
+          handleSelectMovie={handleSelectMovie}
+        />
+      </main>
+    </div>
+  );
 }
 
 export default App;
-

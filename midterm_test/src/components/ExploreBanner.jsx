@@ -1,5 +1,29 @@
 import styled from "styled-components";
 
+export default function ExploreBanner({ movie, description }) {
+  return (
+    <ExploreWrapper>
+      <h2 className="section-title">Explore</h2>
+      <p className="section-subtitle">What are you gonna watch today ?</p>
+
+      <div className="banner">
+        <img
+          src={movie.image}
+          alt={movie.movieName}
+          className="banner-img"
+        />
+
+        <div className="banner-overlay">
+          <div className="banner-content">
+            <h3 className="banner-title">{movie.movieName}</h3>
+            <p className="banner-desc">{description}</p>
+          </div>
+        </div>
+      </div>
+    </ExploreWrapper>
+  );
+}
+
 const ExploreWrapper = styled.section`
   margin-top: 40px;
   color: #fff;
@@ -13,7 +37,6 @@ const ExploreWrapper = styled.section`
   .section-subtitle {
     font-size: 22px;
     font-weight: 400;
-    line-height: 40px;
     color: #868686;
   }
 
@@ -22,12 +45,15 @@ const ExploreWrapper = styled.section`
     position: relative;
     width: 100%;
     border-radius: 12px;
+    height: 400px;
+    overflow: hidden;
   }
 
   .banner-img {
-    width: 100%;
-    height: auto;       
+    width: 100%;     
     display: block;
+    height: 100%;
+    object-fit: cover;
   }
 
   .banner-overlay {
@@ -43,7 +69,7 @@ const ExploreWrapper = styled.section`
     z-index: 2;
     max-width: 520px;
     padding-left: 50px;
-    margin-top: 200px;   
+    margin-top: 150px;   
   }
 
   .banner-title {
@@ -55,34 +81,9 @@ const ExploreWrapper = styled.section`
   .banner-desc {
     font-size: 16px;
     font-weight: 400;
-    line-height: 27px;
+    line-height: 24px;
     color: #ffffff;
+    margin-top: -5px;
   }
 `;
 
-export default function ExploreBanner({ movie }) {
-    return (
-        <ExploreWrapper>
-            <h2 className="section-title">Explore</h2>
-            <p className="section-subtitle">What are you gonna watch today ?</p>
-
-            <div className="banner">
-                <img
-                    src={movie.image}
-                    alt={movie.movieName}
-                    className="banner-img"
-                />
-
-                <div className="banner-overlay">
-                    <div className="banner-content">
-                        <h3 className="banner-title">{movie.movieName}</h3>
-                        <p className="banner-desc">
-                            Corrupt politicians, frenzied nationalists, and other warmongering forces constantly jeopardize the thin veneer of peace between neighboring countries Ostania and Westalis.
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-        </ExploreWrapper>
-    );
-}
