@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 * {
   margin: 0;
@@ -5,4 +6,15 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-@import "tailwindcss";
+
+.frame-home {
+  width: 1340px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 83px;
+  padding-right: 83px;
+}
+
+body {
+  background-color: #192026;
+}
