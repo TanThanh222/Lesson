@@ -6,7 +6,7 @@ import EditIcon from "../assets/icons/EditIcon";
 import AttachmentIcon from "../assets/icons/AttachmentIcon";
 import styled from "styled-components";
 import CreateTaskModal from "./CreateTaskModal";
-function TaskCard({ task, setTasksData }) {
+function TaskCard({ task }) {
   const {
     taskId,
     title,
@@ -15,7 +15,7 @@ function TaskCard({ task, setTasksData }) {
     assignedTo,
     deadline,
     totalAttachments,
-  } = task;``
+  } = task;
 
   const deadlineDate = new Date(deadline).toLocaleDateString("en-US", {
     month: "short",
@@ -52,7 +52,6 @@ function TaskCard({ task, setTasksData }) {
       <CreateTaskModal
         open={open}
         setOpen={setOpen}
-        setTasksData={setTasksData}
         taskEdit={task}
       />
     </>
