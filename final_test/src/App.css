@@ -1,0 +1,118 @@
+.page {
+  max-width: 520px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-weight: 750;
+  font-size: 30px;
+  margin-bottom: 18px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 20px;
+  margin-right: -60px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #333;
+  border-bottom: 1px solid transparent;
+}
+
+.tab.active {
+  border-bottom: 5px solid #2f80ed;
+}
+
+.addRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.addBtn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  background: #2f80ed;
+  color: white;
+  cursor: pointer;
+  margin-right: -60px;
+}
+
+input[type="checkbox"] {
+  accent-color: #2f80ed;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 6px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.text.done {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.deleteOne {
+  filter: brightness(2) invert(1);
+  margin-right: -70px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.deleteAll {
+  display: flex;
+  background: #eb5757;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  margin-right: -60px;
+}
+
+.deleteAll .icon {
+  filter: brightness(1) invert(1);
+  margin-right: 10px;
+}
+
+.empty {
+  color: #888;
+  padding: 10px 6px;
+}
